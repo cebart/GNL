@@ -38,7 +38,7 @@ static char		*ft_put_line(char *str)
 
 int			get_next_line(const int fd, char **line)
 {
-	static t_file	files[100];
+	static t_file	files[100]; /* OPEN_MAX*/
 	int				ret;
 	char			*str;
 
@@ -47,7 +47,7 @@ int			get_next_line(const int fd, char **line)
 	if (fd < 0 || BUFF_SIZE < 0 || !line)
 		return (-1);
 	if (!files[fd].buf)
-		files[fd].buf = ft_strnew(1);
+		files[fd].buf = ft_strnew(BUFF_SIZE + 1);
 	while (!(ft_strchr(files[fd].buf, '\n')))
 	{
 		ret = read(fd, str, BUFF_SIZE);
@@ -55,7 +55,7 @@ int			get_next_line(const int fd, char **line)
 			return (-1);
 		str[ret] = '\0';
 		files[fd].buf = ft_strjoin(files[fd].buf, str);
-		if (ret == 0 && *(files[fd].buf) == '\0')
+		if (ret == 0 && files[fd].buf[0] == '\0')
 			return (0);
 		if (ret == 0)
 			break ;
