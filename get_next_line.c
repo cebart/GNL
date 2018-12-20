@@ -14,7 +14,6 @@ static char	    *ft_too_much_read(char *str)
 		return (NULL);
 	}
 	leftover = ft_strdup(str + i + 1);
-	ft_strdel(&str);
 	return (leftover);
 }
 
@@ -24,8 +23,7 @@ static char		*ft_put_line(char *str)
 	char	*line;
 
     i = ft_strlen(str);
-	if(!(line = malloc(sizeof(char) * i + 1)))
-        return (NULL);
+	line = ft_strnew(i + 1);
 	i = 0;
 	while (str[i] != '\n' && str[i])
 	{

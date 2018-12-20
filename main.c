@@ -22,7 +22,6 @@ int		main(int argc, char **argv)
 	while (get_next_line(fd, &line) == 1)
 	{
 		ft_putendl(line);
-		free(line);
 	}
 	if (argc >= 2)
 		close(fd);
